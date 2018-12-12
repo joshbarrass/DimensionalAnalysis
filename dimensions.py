@@ -1,6 +1,8 @@
 # Dimensional analysis
 
+from __future__ import unicode_literals
 import string
+import sys
 
 class DimensionsError(Exception):
     pass
@@ -9,7 +11,7 @@ class Dimensions(object):
     def __init__(self,d):
         if isinstance(d,int):
             self.dimensions = {}
-        elif isinstance(d,str):
+        elif isinstance(d,str) or (sys.version_info[0] == 2 and isinstance(d,unicode)):
             self.dimensions = self.detect_dimensions(d)
         else:
             raise TypeError("d must be an integer or a string")
